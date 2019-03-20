@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>BCT客户端</title>
+
+    <!-- jQuery -->
+    <script src="/static/lib/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap -->
+    <link href="/static/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <script src="/static/lib/bootstrap/bootstrap.bundle.min.js"></script>
+
+    <!-- 自定义 -->
+    <link href="/static/css/custom.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">Blockchain Client</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">生成钱包
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/make/transaction">生成交易</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/view/transactions">查看交易</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="card-body">
+                    <h4 class="card-title">生成钱包</h4>
+                    <p class="card-text">点击下面的按钮,可以生成一个区块链钱包</p>
+                    <input type="button" class="btn btn-primary btn-lg" value="生成">
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="container">
+
+        <div class="row">
+            <label class="col-sm-2">公钥(Public Key):</label>
+            <div class="col-sm-10">
+                <textarea id="public_key" rows="5" class="form-control" readonly></textarea>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="row">
+            <label class="col-sm-2">私钥(Private Key):</label>
+            <div class="col-sm-10">
+                <textarea id="private_key" rows="5" class="form-control" readonly></textarea>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="row" id="warning" style="display:none">
+            <div class="col-sm-12">
+                <div class="alert alert-danger" role="alert">
+                    请注意：
+                    <ul>
+                        <li>请保存好您的公钥以及私钥, 本页面不会代理保管.</li>
+                        <li>请不要把你的私钥与其他人共享!</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script>
+        $(function () {
+            $('input').click(function () {
+
+                $.ajax({
+                    url: '/wallet/new',
+                    type: 'GET',
+                    success: function (response) {
+                        document.getElementById("private_key").innerHTML = response[
+                            'private_key'];
+                        document.getElementById("public_key").innerHTML = response[
+                            'public_key'];
+                        document.getElementById("warning").style.display = "block";
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            });
+        })
+    </script>
+
+
+
+</body>
+
+</html>
