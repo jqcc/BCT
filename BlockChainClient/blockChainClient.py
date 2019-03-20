@@ -62,6 +62,7 @@ def new_wallet():
     }
     return jsonify(resonse), 200
 
+# BCT客户端生成交易路由
 @app.route('/generate/transaction', methods=['POST'])
 def generate_transaction():
     sender_address = request.form['sender_address']

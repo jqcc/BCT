@@ -69,7 +69,7 @@ class BlockChain:
             self.transactions.append(transaction)
             return len(self.chain) + 1
         else:
-            print('111', transaction)
+            # print('submit_transaction: ', transaction)
             transaction_verification = self.verify_transaction_signature(sender_address, signature, transaction)
             if transaction_verification:
                 self.transactions.append(transaction)

@@ -6,7 +6,7 @@
 
 * python3
 * python-flask
-* Crypto
+* rsa
 
 ## 使用
 
@@ -21,11 +21,11 @@ pip install -i http://pypi.douban.com/simple -- trusted-host pypi.douban.com -r 
 
 ## 待做
 
-1. 生成每个钱包有多少钱的逻辑
-2. 自己也可以当矿工
+1. 用一个RNN模型拟合BCT币的交易价格, 预测未来一天的交易价格
+2. 查看每个钱包的BCT币数量
 
 ## 其他
 
 ### 相关资料
 
-* 加密库Crypto相关文档: [Crypto](https://www.dlitz.net/software/pycrypto/api/current/Crypto-module.html)
+* ~~加密库Crypto相关文档: [Crypto](https://www.dlitz.net/software/pycrypto/api/current/Crypto-module.html "已换新加密模块rsa")~~
