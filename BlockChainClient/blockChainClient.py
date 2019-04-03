@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, send_from_directory
 
 import Crypto.Random
 from Crypto.PublicKey import RSA
@@ -6,8 +6,10 @@ from Crypto.PublicKey import RSA
 import rsa
 
 import binascii
+import os
 
 from transaction import Transaction
+from walletRepo import wallet_report
 
 app = Flask(__name__)
 
@@ -61,6 +63,18 @@ def new_wallet():
         'public_key': binascii.hexlify(public_key.save_pkcs1('DER')).decode()
     }
     return jsonify(resonse), 200
+
+@app.route('/wallet/save')
+def save_wallet():
+    pub_key = request.args.get('pub_key')
+    pri_key = request.args.get('pri_key')
+    if pub_key is None or pri_key is None:
+        return 500
+    
+    pdf_name = wallet_report(pub_key, pri_key)
+    directory = os.getcwd() + '\pdfs'
+    return send_from_directory(directory, pdf_name, as_attachment=True)
+
 
 # BCT客户端生成交易路由
 @app.route('/generate/transaction', methods=['POST'])

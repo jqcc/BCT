@@ -56,7 +56,8 @@
                 <div class="card-body">
                     <h4 class="card-title">创建钱包</h4>
                     <p class="card-text">点击下面的按钮,可以创建一个区块链钱包</p>
-                    <input type="button" class="btn btn-primary btn-lg" value="生成">
+                    <input type="button" class="btn btn-primary btn-lg" id='get_key' value="生成">
+                    <a class="btn btn-primary btn-lg" id='save_pdf' href="" down="pdf">保存</a>
                 </div>
 
             </div>
@@ -102,8 +103,7 @@
 
     <script>
         $(function () {
-            $('input').click(function () {
-
+            $("#get_key").click(function () {
                 $.ajax({
                     url: '/wallet/new',
                     type: 'GET',
@@ -113,12 +113,23 @@
                         document.getElementById("public_key").innerHTML = response[
                             'public_key'];
                         document.getElementById("warning").style.display = "block";
+                        $("#save_pdf")[0].href += "wallet/save?pri_key="+response["private_key"]+"&pub_key="+response["public_key"];
                     },
                     error: function (error) {
                         console.log(error);
                     }
                 });
             });
+
+            $("#save_pdf").click(function() {
+                pub_key = $("#public_key").val()
+                pri_key = $("#private_key").val()
+
+                if (pub_key === '' || pri_key === '') {
+                    alert('当前秘钥不完整');
+                    return;
+                }
+            })
         })
     </script>
 
