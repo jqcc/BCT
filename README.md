@@ -19,7 +19,7 @@ pip install -i http://pypi.douban.com/simple -- trusted-host pypi.douban.com -r 
 
 ## 待做
 
-1. 添加MySQL持久化
+1. 添加MySQL持久化(目前采用pymysql读写数据库,考虑使用SQLAlchemy)
 2. 用一个RNN模型拟合BCT币的交易价格, 预测未来一天的交易价格
 3. 查看每个钱包的BCT币数量
 
@@ -28,3 +28,4 @@ pip install -i http://pypi.douban.com/simple -- trusted-host pypi.douban.com -r 
 ### 相关资料
 
 * ~~加密库Crypto相关文档: [Crypto](https://www.dlitz.net/software/pycrypto/api/current/Crypto-module.html "已换新加密模块rsa")~~
+* pymysql教程: [pymysql-菜鸟教程](http://www.runoob.com/python3/python3-mysql.html)
