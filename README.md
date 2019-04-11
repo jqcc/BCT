@@ -4,9 +4,7 @@
 
 ## 环境要求
 
-* python3
-* python-flask
-* rsa
+* python3.5
 
 ## 使用
 
@@ -21,8 +19,9 @@ pip install -i http://pypi.douban.com/simple -- trusted-host pypi.douban.com -r 
 
 ## 待做
 
-1. 用一个RNN模型拟合BCT币的交易价格, 预测未来一天的交易价格
-2. 查看每个钱包的BCT币数量
+1. 添加MySQL持久化
+2. 用一个RNN模型拟合BCT币的交易价格, 预测未来一天的交易价格
+3. 查看每个钱包的BCT币数量
 
 ## 其他
 
