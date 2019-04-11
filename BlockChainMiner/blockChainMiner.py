@@ -35,6 +35,7 @@ def new_transaction():
         response = {'message': '交易会被添加到区块: ' + str(transaction_result)}
         return jsonify(response), 201
 
+# 获取未验证的交易信息
 @app.route('/transactions/get')
 def get_transactions():
     transactions = blockchain.transactions
@@ -42,6 +43,7 @@ def get_transactions():
     response = {'transactions': transactions}
     return jsonify(response), 200
 
+# 返回区块链信息
 @app.route('/chain')
 def full_chain():
     response = {
@@ -111,6 +113,16 @@ def get_nodes():
     nodes = list(blockchain.nodes)
     response = {'nodes': nodes}
     return jsonify(response), 200
+
+# 添加404页面
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
+# 添加500页面
+@app.errorhandler(500)
+def internal_server_error(e):
+    return render_template('500.html'), 500
 
 
 if __name__ == '__main__':

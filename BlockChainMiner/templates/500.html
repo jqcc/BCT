@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>500 - Internal Server Error</title>
+
+    <!-- jQuery -->
+    <script src="/static/lib/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap -->
+    <link href="/static/lib/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <script src="/static/lib/bootstrap/bootstrap.bundle.min.js"></script>
+
+    <!-- 自定义 -->
+    <link href="/static/css/custom.css" rel="stylesheet">
+    <link href="/static/css/500error.css" rel="stylesheet">
+    
+
+</head>
+
+<body>
+
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">区块链客户端</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">创建钱包</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/make/transaction">生成交易</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/view/transactions">查看交易</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+
+    <div class="full-screen" style="padding-top: 150px;">
+        <div class="container">
+        <span class="error-num">5</span>
+            <div class="eye"></div>
+            <div class="eye"></div>
+            <p class="sub-text">呃！服务器开小差, 页面崩溃了...</p>
+            <!-- <a href="">返回</a> -->
+        </div>
+    </div>
+    
+
+    <script src="/static/js/500error.js"></script>
+</body>
+
+</html>
