@@ -60,9 +60,6 @@ def mine():
     last_block = blockchain.chain[-1]
     nonce = blockchain.proof_of_work()
 
-    # blockchain.submit_transaction(sender_address=MINING_SENDER, recipient_address=blockchain.node_id,
-    #         value=MINING_REWARD, signature='')
-
     previous_hash = blockchain.hash(last_block)
     block = blockchain.create_block(nonce, previous_hash)
 
