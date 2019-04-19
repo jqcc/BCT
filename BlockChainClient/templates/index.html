@@ -113,7 +113,8 @@
                         document.getElementById("public_key").innerHTML = response[
                             'public_key'];
                         document.getElementById("warning").style.display = "block";
-                        $("#save_pdf")[0].href += "wallet/save?pri_key="+response["private_key"]+"&pub_key="+response["public_key"];
+                        // 重新赋值 防止字符串追加
+                        $("#save_pdf")[0].href = "wallet/save?pri_key="+response["private_key"]+"&pub_key="+response["public_key"];
                     },
                     error: function (error) {
                         console.log(error);
