@@ -21,12 +21,14 @@ MINING_DIFFICULTY = 2
 
 class BlockChain:
 
-    def __init__(self):
+    def __init__(self, port):
         self.transactions = []
         self.chain = []
         self.nodes = set()
         # 使用uuid生成一个结点id
         self.node_id = str(uuid4()).replace('-', '')
+        self.port = port
+        self.database = "bct"+str(port)
 
         self.init_from_db()
 
@@ -36,7 +38,7 @@ class BlockChain:
                 host="127.0.0.1",
                 user="root",
                 password="root",
-                database="bct"
+                database=self.database
             )
 
         # 创建一个执行sql的游标
@@ -128,7 +130,7 @@ class BlockChain:
                 host="127.0.0.1",
                 user="root",
                 password="root",
-                database="bct"
+                database=self.database
             )
 
         # 创建一个执行sql的游标
@@ -180,7 +182,7 @@ class BlockChain:
                 host="127.0.0.1",
                 user="root",
                 password="root",
-                database="bct"
+                database=self.database
             )
 
         # 创建一个执行sql的游标
@@ -249,15 +251,25 @@ class BlockChain:
             block = chain[current_index]
             if block['previous_hash'] != self.hash(last_block):
                 return False
+            print("ok11")
+            transactions_list = block['transactions'][:]
+            # transaction_elements = ['sender_address', 'recipient_address', 'value']
+            # transactions = [OrderedDict((key, transaction[key]) 
+            #         for key in transaction_elements) for transaction in transactions]
+
+            transactions = []
+            for tr in transactions_list:
+                transaction = OrderedDict();
+                transaction['sender_address'] = tr['sender_address']
+                transaction['recipient_address'] = tr['recipient_address']
+                transaction['value'] = tr['value']
+                transactions.append(transaction)
             
-            transactions = block['transactions'][:-1]
-            transaction_elements = ['sender_address', 'recipient_address', 'value']
-            transactions = [OrderedDict((key, transaction[key]) 
-                    for key in transaction_elements) for transaction in transactions]
+            print(transactions)
             
             if not self.valid_proof(transactions, block['previous_hash'], block['nonce'], MINING_DIFFICULTY):
                 return False
-
+            print("ok2")
             last_block = block
             current_index += 1
         return True
@@ -280,5 +292,50 @@ class BlockChain:
 
         if new_chain:
             self.chain = new_chain
+            # 还没成功
+            # 把新链写入数据库, 先删库, 后写入, 主要针对blockchain表
+            # 连接数据库
+            conn = pymysql.connect(
+                    host="127.0.0.1",
+                    user="root",
+                    password="root",
+                    database=self.database
+                )
+
+            # 创建一个执行sql的游标
+            cursor = conn.cursor()
+            # 删除原有的链
+            sql1 = "delete from blockchain;"
+            sql3 = "delete from transactions;"
+
+            try:
+                # 删除无效数据
+                cursor.execute(sql1)
+                cursor.execute(sql3)
+                # 插入新链
+                for block in self.chain:
+                    # 插入区块信息
+                    sql2 = " \
+                        insert into \
+                        blockchain(block_number, timestamp, nonce, previous_hash) \
+                        values(%i, '%s', %i, '%s');" % (block['block_number'], block['timestamp'],
+                        block['nonce'], block['previous_hash'])
+                    cursor.execute(sql2)
+                    for tr in block['transactions']:
+                        # 插入区块中的交易信息
+                        sql4 = "\
+                            insert into \
+                            transactions(block_number, sender_address, recipient_address, value) \
+                            values(%i, '%s', '%s', '%s');" % (block['block_number'], tr['sender_address'],
+                            tr['recipient_address'], tr['value'])
+                        cursor.execute(sql4)
+                
+                conn.commit()
+            except:
+                print("error: ins_bct_upd_t")
+                conn.rollback()
+            
+            conn.close()
+
         
         return False

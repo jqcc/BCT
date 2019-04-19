@@ -9,7 +9,19 @@ CORS(app)  # 支持跨域请求
 MINING_SENDER = 'THE BLOCKCHAIN'
 MINING_REWARD = 1
 
-blockchain = BlockChain()
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument('-p', '--port', default=5000, type=int, help='运行端口')
+parser.add_argument('-t', '--host', default='127.0.0.1', type=str, help='运行服务器ip')
+parser.add_argument('-d', '--debug', default=True, type=bool, help='开启debug模式')
+
+args = parser.parse_args()
+port = args.port
+host = args.host
+debug = args.debug
+
+blockchain = BlockChain(port)
 
 @app.route('/')
 def index():
@@ -123,16 +135,5 @@ def internal_server_error(e):
 
 
 if __name__ == '__main__':
-    import argparse
-
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-p', '--port', default=5000, type=int, help='运行端口')
-    parser.add_argument('-t', '--host', default='127.0.0.1', type=str, help='运行服务器ip')
-    parser.add_argument('-d', '--debug', default=True, type=bool, help='开启debug模式')
-
-    args = parser.parse_args()
-    port = args.port
-    host = args.host
-    debug = args.debug
 
     app.run(debug=debug, host=host, port=port)
