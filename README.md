@@ -20,10 +20,10 @@ pip install -i http://pypi.douban.com/simple -- trusted-host pypi.douban.com -r 
 ## 待做
 
 1. 添加MySQL持久化(目前采用pymysql读写数据库,考虑使用SQLAlchemy)
+    目前每个节点对应一个数据库
+    考虑更新为每个节点对应一个数据中的两个表
 2. 持久化某矿工节点保存的其它矿工节点
 3. 完善页面错误, 警告等提示
-4. 用一个RNN模型拟合BCT币的交易价格, 预测未来一天的交易价格
-5. 查看每个钱包的BCT币数量
 
 ## 其他
 
