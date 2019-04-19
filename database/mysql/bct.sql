@@ -14,10 +14,10 @@ Date: 2019-04-11 16:09:09
 */
 
 -- 重建数据库
-drop database if exists `bct`;
-create database `bct`;
+drop database if exists `bct5000`;
+create database `bct5000`;
 
-use `bct`;
+use `bct5000`;
 
 SET FOREIGN_KEY_CHECKS=0;
 
