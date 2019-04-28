@@ -66,8 +66,9 @@ def full_chain():
 
 @app.route('/mine')
 def mine():
-    if len(blockchain.transactions) <= 0:
-        return '没有待验证交易', 200 
+    # 可以挖空节点
+    # if len(blockchain.transactions) <= 0:
+    #     return '没有待验证交易', 200 
 
     last_block = blockchain.chain[-1]
     nonce = blockchain.proof_of_work()

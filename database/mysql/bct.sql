@@ -51,7 +51,6 @@ CREATE TABLE `transactions` (
   `value` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `block_number` (`block_number`)
-  -- CONSTRAINT `transactions_ibfk_1` FOREIGN KEY (`block_number`) REFERENCES `blockchain` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------

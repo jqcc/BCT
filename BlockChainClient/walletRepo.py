@@ -2,7 +2,6 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.cidfonts import UnicodeCIDFont  
 pdfmetrics.registerFont(UnicodeCIDFont('STSong-Light'))
 from reportlab.pdfbase.ttfonts import TTFont 
-# 这里是要导入字体文件 下方我会给出地址
 pdfmetrics.registerFont(TTFont('msyh', 'msyh.ttf'))  
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.platypus import SimpleDocTemplate, Paragraph

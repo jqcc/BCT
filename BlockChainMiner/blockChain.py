@@ -336,6 +336,7 @@ class BlockChain:
                 conn.rollback()
             
             conn.close()
+            return True
 
         
         return False
