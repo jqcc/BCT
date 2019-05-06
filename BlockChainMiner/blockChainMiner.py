@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
 
+from collections import OrderedDict
+
 from blockChain import BlockChain
 
 app = Flask(__name__)
@@ -67,8 +69,12 @@ def full_chain():
 @app.route('/mine')
 def mine():
     # 可以挖空节点
-    # if len(blockchain.transactions) <= 0:
-    #     return '没有待验证交易', 200 
+    if len(blockchain.transactions) <= 0:
+        empty_transaction = OrderedDict();
+        empty_transaction['sender_address'] = MINING_SENDER
+        empty_transaction['recipient_address'] = blockchain.node_id
+        empty_transaction['value'] = 1
+        blockchain.transactions.append(empty_transaction)
 
     last_block = blockchain.chain[-1]
     nonce = blockchain.proof_of_work()

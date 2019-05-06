@@ -25,7 +25,7 @@ class BlockChain:
         self.transactions = []
         self.chain = []
         self.nodes = set()
-        # 使用uuid生成一个结点id
+        # 使用uuid生成一个结点id 作为区块链矿工节点的钱包地址
         self.node_id = str(uuid4()).replace('-', '')
         self.port = port
         self.database = "bct"+str(port)
