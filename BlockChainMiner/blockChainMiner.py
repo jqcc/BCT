@@ -75,6 +75,7 @@ def mine():
         empty_transaction['recipient_address'] = blockchain.node_id
         empty_transaction['value'] = 1
         blockchain.transactions.append(empty_transaction)
+        blockchain.ins_t(empty_transaction)
 
     last_block = blockchain.chain[-1]
     nonce = blockchain.proof_of_work()
