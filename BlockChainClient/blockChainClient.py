@@ -11,6 +11,8 @@ import os
 from transaction import Transaction
 from walletRepo import wallet_report
 
+ROOTPATH = 'E:/VScode/BCT/'
+
 app = Flask(__name__)
 
 # 主页面
@@ -84,7 +86,7 @@ def save_wallet():
         return 500
     
     pdf_name = wallet_report(pub_key, pri_key)
-    directory = os.getcwd() + '\pdfs'
+    directory = ROOTPATH + '/BlockChainClient/pdfs'
     return send_from_directory(directory, pdf_name, as_attachment=True)
 
 

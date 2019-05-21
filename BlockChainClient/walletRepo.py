@@ -8,6 +8,8 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph
 import time
 import os
 
+ROOTPATH = 'E:/VScode/BCT/'
+
 def wallet_report(pub_key, pri_key):
     # 生成一个存储的对象集合
     story=[]
@@ -34,7 +36,7 @@ def wallet_report(pub_key, pri_key):
 
     tm = str(time.time()).split('.')[1]
     print(os.getcwd())
-    doc = SimpleDocTemplate('./pdfs/wallet_' + tm + '.pdf')
+    doc = SimpleDocTemplate(ROOTPATH + 'BlockChainClient/pdfs/wallet_' + tm + '.pdf')
     doc.build(story)
 
     # 只需要返回文件名
