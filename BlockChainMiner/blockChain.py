@@ -153,7 +153,7 @@ class BlockChain:
         
         conn.close()
 
-    # BCT客户端发来的验证交易请求
+    # BCTS客户端发来的验证交易请求
     def submit_transaction(self, sender_address, recipient_address, value, signature):
         transaction = OrderedDict();
         transaction['sender_address'] = sender_address

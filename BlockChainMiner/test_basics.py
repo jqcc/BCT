@@ -11,7 +11,7 @@ class MinerTestCase(unittest.TestCase):
 
     def test_f1(self):
         rv = self.app.get('/')
-        assert b'SunJQ Graduation Design - BCT' in rv.data
+        assert b'SunJQ Graduation Design - BCTS' in rv.data
 
     def test_f2(self):
         rv = self.app.get('/chain')

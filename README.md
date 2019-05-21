@@ -1,4 +1,4 @@
-# BCT(BlockChain Transaction)
+# BCTS(BlockChain Transaction System)
 
 区块链支付结算系统的设计与实现。
 
@@ -24,6 +24,8 @@ pip install -i http://pypi.douban.com/simple -- trusted-host pypi.douban.com -r 
     考虑更新为每个节点对应一个数据中的两个表
 2. 持久化某矿工节点保存的其它矿工节点
 3. 完善页面错误, 警告等提示
+4. 增加一个区块链服务器, 调整系统逻辑为, 生成交易发送到区块链服务器, 由区块链服务器发送到各个矿工端.
+    矿工端在生成时就应该到区块链服务器进行登记注册。
 
 ## 其他
 
